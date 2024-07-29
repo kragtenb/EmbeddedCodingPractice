@@ -1,0 +1,29 @@
+1. Basic Thread Creation:
+Write a C++ program that creates two threads. Each thread should print numbers from 1 to 5.
+
+2. Thread Synchronization with Mutexes:
+Write a program where two threads increment a shared integer variable 1000 times each. Use a mutex to ensure that the shared variable is correctly incremented.
+
+3. Producer-Consumer Problem with Condition Variables:
+Implement a producer-consumer problem using condition variables. The producer should generate numbers and add them to a queue, and the consumer should remove and print those numbers.
+
+4. Thread Pool Implementation:
+Implement a simple thread pool that can handle multiple tasks concurrently. Provide a way to add tasks to the thread pool and get the results.
+
+5. Parallel Algorithms:
+Use the parallel version of std::for_each to multiply each element in a vector by 2. Verify that the operation is performed correctly.
+
+6. Avoiding Deadlocks with std::scoped_lock:
+Write a program that creates two threads, each trying to lock two mutexes in different orders. Use std::scoped_lock to avoid deadlocks.
+
+7. Shared Lock with std::shared_mutex:
+Implement a scenario where multiple threads read from a shared resource using std::shared_mutex and one thread writes to it.
+
+8. Barrier Synchronization:
+Use std::barrier to synchronize three threads at a certain point in their execution. Each thread should print a message before and after the barrier.
+
+9. Profiling Multithreaded Code:
+Describe the steps you would take to profile a multithreaded application using a tool like Intel VTune. What kind of issues would you look for?
+
+10. Debugging Race Conditions:
+Write a multithreaded program that deliberately introduces a race condition. Use ThreadSanitizer to detect the race condition and describe how you would fix it.
