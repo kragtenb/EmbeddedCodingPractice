@@ -3,3 +3,22 @@
 3. RAII is a programming idiom where a resource is allocated during object creation and a resource is deallocated when the object is destroyed. RAII tied the lifecycle of a resource to the lifecycle of the object, thus when the object goes out of scope the resource is released. This is important to prevent resource leaks and managing memory effectively. The constructor and deconstructor is needed due to this effect.
 4. A binary search tree is a data structure that is provided by a pointer to the head node. Each node will have the value it represents and a left and a right node. Every node that is to the left of current node will be less than the current node and every node to the right of the current node is greater than the current node. Depending on the implementation nodes that are equal to could be to the left or right. 
 5. A shallow copy is a bitwise copy of the object but does not copy or dynamically create new copies of any nested objects. The original and copy's nest objects would still be pointing to the same. While a deep copy would copy all nested objects and allocate the memory so the objects are completely different.
+6. Stack memory is compiled-time allocated memory, while heap memory is dynamically allocated memory. So it is allocated during runtime of the program. You would use stack memory if you knew the exact size of the object and it is not determined in runtime. While if you have a dynamically changing object size then that will need to be put into the heap memory.
+   1. Stack memory
+      1. Stack memory is region of memory that stores temporary variables created by functions. This is controlled by the cpu automatically and memory is allocated and deallocated when the as functions push and pop their frames onto and off the stack.
+      2. Stack access is very fast
+      3. Scope of the variables in the function will only exist until the function has come out of scope and is reclaimed.
+   2. Heap memory
+      1. dynamically allocationed and need to be freed manually. using *new*, *delete*, *malloc*, and *free*.
+      2. Heap data is used when that data will outlive the callstack.
+      3. Global variables are always stored on the heap.
+      4. Classes and variables inside will also be on the heap
+      5. static variables are always on the heap
+      6. Anonomous function parameters and variables in the function that was called will be copied to the heap. But the function itself gets put on the stack.
+7. const is when you make the variable a read-only variable. While a constexpr specifies that a variable, function or class can be evaluated at compile time. This can lead to better optimizations and faster perfoirmance.
+8. Vector is a array like structure that supports dynamic sizing. Vectors are also stored in contiguous memory for efficient random access. std::array is used for fixed sizing. Both support automatic clearning of data. Vectors should be used in a majority of cases but when a fixed size array is needed then std::array should be used. std::array is faster and is also stored on the stack. While vector is typically on the heap
+9. Rule of three is if there is a custom implementation of either a classes destructor, constructor or copy assignment operator then all 3 will need to be customly implemented.
+   1.  Rule of five
+       1.  This adds the move constructor and move assigment 
+   2.  Rule of zero is basically use smart pointers so that you do not need to worry about resource management.
+10. Overloading a function is when you create a function with the same name but it would take new parameters. Overriding a function, changes the functionality of the function. This is usually involved in inheritance. So I could overload the addition function of a class to add a 3rd parameter when it only had 2 before. When overriding I could have had a class Dog and a class shepard that inherited the function print from Dog. In Dog prints it would print dog but for shepard the function is overriden to print shepard instead.
