@@ -8,3 +8,4 @@
 8. What are the key differences between 'std::vector' and std::array' in c++? When would you choose one over the other?
 9. What is the "Rule of Three" in C++? How does it relate to the "Rule of Five" and "Rule of Zero"?
 10. What is the difference between overloading and overriding in C++? Can you provide examples of each?
+11. What is a C++ template, and how does template specialization work? Can you provide an example of when and how you would use template specialization?
