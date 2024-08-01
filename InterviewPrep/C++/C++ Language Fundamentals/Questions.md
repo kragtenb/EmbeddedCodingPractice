@@ -9,3 +9,5 @@
 9. What is the "Rule of Three" in C++? How does it relate to the "Rule of Five" and "Rule of Zero"?
 10. What is the difference between overloading and overriding in C++? Can you provide examples of each?
 11. What is a C++ template, and how does template specialization work? Can you provide an example of when and how you would use template specialization?
+12. What are smart pointers in C++ and how do they differ from raw pointers? Explain the different types of smart pointers (*std::unique_ptr*, *std::shared_ptr*, *std::weak_ptr*) and provide examples of when and how to use each one.
+13. High-level concurrency explanation and usage
