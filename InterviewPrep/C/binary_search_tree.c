@@ -25,57 +25,111 @@ typedef struct BSTNode
     struct BSTNode* right; 
 } BSTNode;
 
-void initBST(BSTNode** node, int val) {
-    *node = (BSTNode*) malloc(sizeof(BSTNode));
-    (*node)->value = val;
-    (*node)->left = NULL;
-    (*node)->right = NULL;
+BSTNode* insert(BSTNode* node, int val) {
+    if (node == NULL) {
+        BSTNode* newNode = (BSTNode*) malloc(sizeof(BSTNode));
+        newNode->value = val;
+        newNode->left = NULL;
+        newNode->right = NULL;
+        return newNode;
+    }
+
+    if (val < node->value) {
+        node->left = insert(node->left, val);
+    } else if (val > node->value) {
+        node->right = insert(node->right, val);
+    }
+    return node;
 }
 
-void insertBST(const BSTNode** node, int val) {
-    if (*node == NULL) {
-        initBST(&(node), val);
+void inOrderTraversal(BSTNode* node) {
+    if (node == NULL) {
         return;
     }
-    BSTNode* curr = *node;
-    if (val < curr->value) {
-        if (curr->left == NULL) {
-            initBST(&(curr->left), val);
-            return;
-        }
-        insertBST(&(curr->left), val);
-    } else {
-        if (curr->right == NULL) {
-            initBST(&(curr->right), val);
-            return;
-        }
-        insertBST(&(curr->right), val);
-    }
+    inOrderTraversal(node->left);
+    printf("%d ", node->value);
+    inOrderTraversal(node->right);
 }
 
-struct Node
 
-void deleteBST(BSTNode** node, int val){
-    if (*node == NULL) {
-        return;
-    }   
-    if ((*node)->value == val) {
-        // Found node, start deletion
-        if ((*node)->left == NULL && (*node)->right == NULL) {
-            // no children
-            free(*node);
-            return;
-        } else if ((*node)->left != NULL && (*node)->right != NULL) {
-            // two children
+BSTNode* deleteNode(BSTNode* node, int val) {
+    if (node == NULL) {
+        return node;
+    }
+
+    if (node->value == val) {
+        if (node->left == NULL && node->right == NULL) {
+            free(node);
+            node = NULL;
+        } else if (node->left != NULL && node->right != NULL) {
+            // find next node to replace
+            // inorder successor
+            BSTNode* temp = node->right;
+            while (temp->left != NULL) {
+                temp = temp->left;
+            }
+
+            node->value = temp->value;
+
+            node->right = deleteNode(node->right, temp->value);
+            
+        } else if (node->left != NULL) {
+            BSTNode* temp = node;
+            node = node->left;
+            free(temp);
         } else {
-            // on child
-            BSTNode* temp = *node;
-            *node = ((*node)->left != NULL) ? (*node)->left : (*node)->right;
+            BSTNode* temp = node;
+            node = node->right;
             free(temp);
         }
-    } else if (val < (*node)->value) {
-        deleteBST(&((*node)->left), val);
+    } else if (val < node->value) {
+        node->left = deleteNode(node->left, val);
     } else {
-        deleteBST(&((*node)->right), val);
+        node->right = deleteNode(node->right, val);
     }
+    return node;
+}
+
+int findHeight(BSTNode* node) {
+    if (node == NULL) {
+        return 0;
+    }
+    int leftHeight = findHeight(node->left);
+    int rightHeight = findHeight(node->right);
+    return ((leftHeight > rightHeight) ? leftHeight : rightHeight) + 1;
+}
+
+int main() {
+    BSTNode* root = NULL;
+
+    root = insert(root, 50);
+    root = insert(root, 30);
+    root = insert(root, 20);
+    root = insert(root, 40);
+    root = insert(root, 70);
+    root = insert(root, 60);
+    root = insert(root, 80);
+
+    printf("In-order traversal:\n");
+    inOrderTraversal(root);
+    printf("\n");
+
+    printf("Height of the tree: %d\n", findHeight(root));
+
+    root = deleteNode(root, 20);
+    printf("In-order traversal after deleting 20:\n");
+    inOrderTraversal(root);
+    printf("\n");
+
+    root = deleteNode(root, 30);
+    printf("In-order traversal after deleting 30:\n");
+    inOrderTraversal(root);
+    printf("\n");
+
+    root = deleteNode(root, 50);
+    printf("In-order traversal after deleting 50:\n");
+    inOrderTraversal(root);
+    printf("\n");
+
+    return 0;
 }
